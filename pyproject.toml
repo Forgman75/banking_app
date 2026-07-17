@@ -1,0 +1,70 @@
+[project]
+name = "kurs-project"
+version = "0.1.0"
+description = "Analyzes transactions"
+authors = [
+    {name = "Forgman75",email = "agolikov2020@gmail.com"}
+]
+requires-python = ">=3.12"
+dependencies = [
+    "requests (>=2.31.0)",
+    "pandas (>=2.0.0)",
+    "openpyxl (>=3.1.0)",
+    "python-dotenv (>=1.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.mypy]
+mypy_path = "src"                    # ← Корень для поиска модулей
+explicit_package_bases = true        # ← Явные базовые пакеты
+namespace_packages = true            # ← Поддержка namespace-пакетов
+disallow_untyped_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_return_any = true
+exclude = 'venv'
+
+[tool.black]
+# Максимальная длина строки
+line-length = 79
+# Файлы, которые не нужно форматировать
+exclude = '''
+(
+  /(
+      \.eggs         # Исключить несколько общих каталогов 
+    | \.git          # в корне проекта
+    | \.hg
+    | \.mypy_cache
+    | \.pytest_cache
+    | \.tox
+    | \.venv
+    | \fenv
+  )/
+  | poetry.lock
+  | .coverage
+  | .env
+  | .gitignore       
+                     
+)
+'''
+
+[tool.isort]
+# максимальная длина строки
+line_length = 79
+multi_line_output = 3
+
+
+[dependency-groups]
+dev = [
+    "black (>=26.5.1,<27.0.0)",
+    "mypy (>=2.1.0,<3.0.0)",
+    "isort (>=8.0.1,<9.0.0)",
+    "flake8 (>=7.3.0,<8.0.0)",
+    "pytest (>=7.4.0)",
+    "pytest-cov (>=4.1.0)"
+]
