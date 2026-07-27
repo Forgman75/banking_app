@@ -80,5 +80,43 @@ def investment_bank(month: str, transactions: List[Dict[str, Any]], limit: int) 
     return total
 
 
+def simple_search(query: str, transactions: List[Dict[str, Any]]) -> str:
+    """
+    Простой поиск транзакций по вхождению подстроки в описание или категорию.
+    
+    :param query: строка для поиска (регистронезависимо)
+    :param transactions: список транзакций
+    :return: JSON-строка со списком найденных транзакций
+    """
+    query_lower = query.lower()
+
+    def matches(t: Dict[str, Any]) -> bool:
+        description = t.get("Описание", "").lower()
+        category = t.get("Категория", "").lower()
+        return query_lower in description or query_lower in category
+
+    filtered = list(filter(matches, transactions))
+    return json.dumps(filtered, ensure_ascii=False)
+
+
+def phone_search(transactions: List[Dict[str, Any]]) -> str:
+    """
+    Поиск транзакций, в описании которых встречаются мобильные номера.
+    
+    Пример описаний:
+        "Я МТС +7 921 11-22-33"
+        "Тинькофф Мобайл +7 995 555-55-55"
+        "МТС Mobile +7 981 333-44-55"
+    
+    :param transactions: список транзакций
+    :return: JSON-строка со списком найденных транзакций
+    """
+    phone_pattern = re.compile(r'\+7\s?\d{3}\s?\d{3}[-\s]?\d{2}[-\s]?\d{2}')
+
+    filtered = list(filter(
+        lambda t: bool(phone_pattern.search(t.get("Описание", ""))),
+        transactions
+    ))
+    return json.dumps(filtered, ensure_ascii=False)
 
 
