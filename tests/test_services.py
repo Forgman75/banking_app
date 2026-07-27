@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from src.services import (
+from src.service_api import (
     get_currency_rates,
     get_stock_prices,
     load_user_settings
@@ -28,9 +28,7 @@ def test_load_user_settings_fallback(tmp_path):
     assert result == {"user_currencies": [], "user_stocks": []}
 
 
-# ─────────────────────────────────────────────
 # Тесты для get_currency_rates
-# ─────────────────────────────────────────────
 @patch("src.services.requests.get")
 def test_get_currency_rates_success(mock_get):
     """Тест успешного получения курсов валют."""
@@ -81,9 +79,7 @@ def test_get_currency_rates_connection_error(mock_get):
     assert rates == []
 
 
-# ─────────────────────────────────────────────
 # Тесты для get_stock_prices
-# ─────────────────────────────────────────────
 @patch("src.services.requests.get")
 def test_get_stock_prices_success(mock_get):
     """Тест успешного получения цен акций."""
