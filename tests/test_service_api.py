@@ -29,7 +29,7 @@ def test_load_user_settings_fallback(tmp_path):
 
 
 # Тесты для get_currency_rates
-@patch("src.services.requests.get")
+@patch("src.service_api.requests.get")
 def test_get_currency_rates_success(mock_get):
     """Тест успешного получения курсов валют."""
     # Настраиваем мок ответа API
@@ -41,7 +41,7 @@ def test_get_currency_rates_success(mock_get):
     mock_get.return_value = mock_response
 
     # Патчим ключ, чтобы тест не зависел от реального .env
-    with patch("src.services.EXCHANGERATE_API_KEY", "test_key"):
+    with patch("src.service_api.EXCHANGERATE_API_KEY", "test_key"):
         rates = get_currency_rates(["USD", "EUR"])
 
     assert len(rates) == 2
@@ -50,7 +50,7 @@ def test_get_currency_rates_success(mock_get):
     assert rates[1] == {"currency": "EUR", "rate": 100.54}
 
 
-@patch("src.services.requests.get")
+@patch("src.service_api.requests.get")
 def test_get_currency_rates_api_error(mock_get):
     """Тест обработки ошибки от API."""
     mock_response = MagicMock()
@@ -60,27 +60,27 @@ def test_get_currency_rates_api_error(mock_get):
     }
     mock_get.return_value = mock_response
 
-    with patch("src.services.EXCHANGERATE_API_KEY", "test_key"):
+    with patch("src.service_api.EXCHANGERATE_API_KEY", "test_key"):
         rates = get_currency_rates(["USD"])
 
     assert rates == []
 
 
-@patch("src.services.requests.get")
+@patch("src.service_api.requests.get")
 def test_get_currency_rates_connection_error(mock_get):
     """Тест обработки сетевой ошибки (DNS, таймаут)."""
     import requests
 
     mock_get.side_effect = requests.exceptions.ConnectionError("DNS failed")
 
-    with patch("src.services.EXCHANGERATE_API_KEY", "test_key"):
+    with patch("src.service_api.EXCHANGERATE_API_KEY", "test_key"):
         rates = get_currency_rates(["USD"])
 
     assert rates == []
 
 
 # Тесты для get_stock_prices
-@patch("src.services.requests.get")
+@patch("src.service_api.requests.get")
 def test_get_stock_prices_success(mock_get):
     """Тест успешного получения цен акций."""
     mock_response = MagicMock()
@@ -95,7 +95,7 @@ def test_get_stock_prices_success(mock_get):
     assert prices[0] == {"stock": "AAPL", "price": 150.12}
 
 
-@patch("src.services.requests.get")
+@patch("src.service_api.requests.get")
 def test_get_stock_prices_missing_data(mock_get):
     """Тест обработки ответа API без нужных данных."""
     mock_response = MagicMock()
