@@ -35,9 +35,7 @@ def test_get_greeting_night(mock_datetime):
     assert get_greeting(datetime.now()) == "Доброй ночи"
 
 
-# ─────────────────────────────────────────────
 # Тесты для generate_home_page
-# ─────────────────────────────────────────────
 @patch("src.views.get_stock_prices")
 @patch("src.views.get_currency_rates")
 @patch("src.views.load_user_settings")
@@ -81,9 +79,7 @@ def test_generate_home_page_error(mock_load_tx):
     assert "File not found" in result["error"]
 
 
-# ─────────────────────────────────────────────
 # Тесты для generate_events_page
-# ─────────────────────────────────────────────
 @patch("src.views.get_stock_prices")
 @patch("src.views.get_currency_rates")
 @patch("src.views.load_user_settings")

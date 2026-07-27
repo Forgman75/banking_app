@@ -7,7 +7,7 @@ import logging
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from src.services import (
+from src.service_api import (
     get_currency_rates,
     get_stock_prices,
     load_user_settings
