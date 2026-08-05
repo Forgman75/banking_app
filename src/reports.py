@@ -21,9 +21,9 @@ def save_report(
     Декоратор для функций-отчётов. Сохраняет возвращаемый DataFrame в файл.
 
     Использование:
-        @save_report                            # имя файла генерируется автоматически
-        @save_report(filename="my_report.csv")  # указанное имя файла
-        @save_report(filename="my_report.xlsx") # формат определяется по расширению
+    @save_report                            # имя файла генерируется автоматически
+    @save_report(filename="my_report.csv")  # указанное имя файла
+    @save_report(filename="my_report.xlsx") # формат определяется по расширению
     """
 
     def decorator(f: Callable) -> Callable:
