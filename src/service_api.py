@@ -29,7 +29,7 @@ def load_user_settings(settings_path: str = "user_settings.json") -> dict:
     try:
         with open(settings_path, "r", encoding="utf-8") as f:
             settings = json.load(f)
-        logger.info(f"Загружены настройки из {settings_path}")
+        logger.debug(f"Загружены настройки из {settings_path}")
         return settings
     except Exception as e:
         logger.error(f"Ошибка загрузки настроек: {e}")

@@ -98,7 +98,7 @@ def investment_bank(
         0.0,
     )
 
-    return total
+    return round(total, 2)
 
 
 def simple_search(query: str, transactions: List[Dict[str, Any]]) -> str:
