@@ -7,6 +7,7 @@ import logging
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from src.files_reader import load_transactions 
 from src.service_api import (
     get_currency_rates,
     get_stock_prices,
@@ -17,8 +18,7 @@ from src.utils import (
     calculate_expenses_by_category,
     filter_by_date_range,
     get_top_transactions,
-    get_transfers_and_cash,
-    load_transactions
+    get_transfers_and_cash
 )
 
 logger = logging.getLogger(__name__)
