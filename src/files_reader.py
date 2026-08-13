@@ -26,8 +26,7 @@ def load_transactions(file_path: str) -> pd.DataFrame:
     try:
         df = pd.read_excel(file_path)
         logger.info(f"Загружено {len(df)} транзакций из {file_path}")
-        logger.info(f"Колонки в файле: {list(df.columns)}")  # Диагностика
-
+        
         # Приводим дату к datetime
         if COL_DATE in df.columns:
             df[COL_DATE] = pd.to_datetime(

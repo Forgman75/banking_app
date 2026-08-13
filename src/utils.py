@@ -17,35 +17,6 @@ COL_CARD = "Номер карты"
 COL_DESCRIPTION = "Описание"
 
 
-def load_transactions(file_path: str) -> pd.DataFrame:
-    """
-    Загружает транзакции из Excel-файла.
-
-    :param file_path: путь к файлу operations.xlsx
-    :return: DataFrame с транзакциями
-    """
-    try:
-        df = pd.read_excel(file_path)
-        logger.info(f"Загружено {len(df)} транзакций из {file_path}")
-    
-        # Приводим дату к datetime
-        if COL_DATE in df.columns:
-            df[COL_DATE] = pd.to_datetime(
-                df[COL_DATE], format="%d.%m.%Y %H:%M:%S", errors="coerce"
-            )
-        else:
-            logger.warning(f"Колонка '{COL_DATE}' не найдена в файле")
-
-        # Приводим сумму к числовому типу
-        if COL_AMOUNT in df.columns:
-            df[COL_AMOUNT] = pd.to_numeric(df[COL_AMOUNT], errors="coerce")
-
-        return df
-    except Exception as e:
-        logger.error(f"Ошибка загрузки файла {file_path}: {e}")
-        raise
-
-
 def filter_by_date_range(
     df: pd.DataFrame, target_date: datetime, period: str = "M"
 ) -> pd.DataFrame:
