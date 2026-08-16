@@ -1,4 +1,47 @@
 {
   "user_currencies": ["USD", "EUR", "CNY", "TRY"],
-  "user_stocks": ["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA", "SPCX", "ANTP"]
+  "user_stocks": ["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA", "SPCX", "ANTP"],
+  "features": {
+    "home_page": {
+        "enabled": true,
+        "auto_run": true,
+        "title": "Главная страница"
+    },
+    "events_page": {
+        "enabled": true,
+        "auto_run": false,
+        "title": "Страница событий"
+    },
+    "cashback_categories": {
+        "enabled": true,
+        "auto_run": true,
+        "title": "Категории кэшбэка"
+    },
+    "investment_bank": {
+        "enabled": true,
+        "auto_run": true,
+        "title": "Инвестиционный банк"
+    },
+    "simple_search": {
+        "enabled": true,
+        "auto_run": false,
+        "title": "Простой поиск"
+    },
+    "phone_search": {
+        "enabled": true,
+        "auto_run": false,
+        "title": "Поиск по телефону"
+    },
+    "spending_by_category": {
+        "enabled": true,
+        "auto_run": true,
+        "title": "Отчет: расходы по категориям"
+    },
+    "spending_by_weekday": {
+        "enabled": true,
+        "auto_run":false,
+        "title": "Отчет: расходы по дням недели"
+    }
+  }
+
 }
